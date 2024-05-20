@@ -7,6 +7,7 @@
 .card__image {
   width: 282px;
   height: 282px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .card__description {
@@ -16,6 +17,7 @@
   background: #fff;
   color: black;
   padding: 25px 15px 31px 21px;
+  border-radius: 0px 0px 10px 10px;
 }
 
 .card__title {
@@ -34,4 +36,14 @@
   width: 21px;
   height: 18px;
   border: none;
+  color: black;
+}
+
+.card__like-button:hover {
+  background: transparent url(../images/heart-inactive.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: none;
+  opacity: 60%;
+  cursor: pointer;
 }
