@@ -77,6 +77,7 @@
 @media screen and (max-width: 640px) {
   .profile {
     flex-direction: column;
+    padding-bottom: 36px;
   }
   .profile__info {
     display: flex;
@@ -84,6 +85,7 @@
     width: 100%;
     justify-content: center;
     padding-bottom: 36px;
+    margin-top: 30px;
   }
   .profile__description {
     width: 100%;
@@ -106,5 +108,8 @@
   .profile__edit-button {
     width: 18px;
     height: 18px;
+  }
+  .profile__description {
+    font-size: 14px;
   }
 }

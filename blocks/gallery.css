@@ -11,3 +11,11 @@
   padding: 0;
   margin: 0;
 }
+
+@media screen and (max-width: 640px) {
+  .gallery__cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
