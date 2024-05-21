@@ -10,14 +10,3 @@
   color: #545454;
   margin: 0;
 }
-
-@media screen and (max-width: 540px) {
-  .footer {
-    margin: 0;
-    padding: 48px 19px 36px;
-  }
-  .footer__author {
-    font-size: 14px;
-    padding-left: 8px;
-  }
-}
