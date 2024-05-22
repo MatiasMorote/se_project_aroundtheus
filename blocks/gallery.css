@@ -13,6 +13,17 @@
 }
 
 @media screen and (max-width: 640px) {
+  .gallery__cards {
+    display: flex;
+    flex-direction: column;
+    max-width: 282px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/*
+@media screen and (max-width: 640px) {
 }
 
 @media screen and (max-width: 475px) {
@@ -24,3 +35,4 @@
     box-sizing: border-box;
   }
 }
+*/
