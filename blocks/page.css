@@ -7,7 +7,6 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 .page__section {
@@ -34,32 +33,24 @@
 @media screen and (max-width: 1024px) {
   .page {
     max-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
 @media screen and (max-width: 768px) {
   .page {
     max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
 @media screen and (max-width: 640px) {
   .page {
     max-width: 475px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
 @media screen and (max-width: 475px) {
   .page {
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
   }
   .page__section {
     max-width: 100%;
