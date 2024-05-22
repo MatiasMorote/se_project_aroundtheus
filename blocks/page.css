@@ -41,23 +41,3 @@
     max-width: 640px;
   }
 }
-
-/*
-@media screen and (max-width: 640px) {
-  .page {
-    max-width: 475px;
-  }
-}
-
-*/
-
-/*
-@media screen and (max-width: 475px) {
-  .page {
-    width: 100%;
-  }
-  .page__section {
-    max-width: 100%;
-  }
-}
-*/

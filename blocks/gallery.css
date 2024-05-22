@@ -21,18 +21,3 @@
     margin: 0 auto;
   }
 }
-
-/*
-@media screen and (max-width: 640px) {
-}
-
-@media screen and (max-width: 475px) {
-  .gallery__cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 19px;
-    box-sizing: border-box;
-  }
-}
-*/
