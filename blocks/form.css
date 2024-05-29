@@ -1,0 +1,31 @@
+.form__input-title {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 358px;
+  margin-bottom: 29.74px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.form__input-description {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 358px;
+  margin-bottom: 0;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.form__input::placeholder {
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+}
