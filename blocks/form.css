@@ -1,4 +1,4 @@
-.form__input-title {
+.form__input_title {
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -10,7 +10,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.form__input-description {
+.form__input_description {
   display: block;
   box-sizing: border-box;
   width: 100%;
