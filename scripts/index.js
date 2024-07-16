@@ -51,6 +51,7 @@ const profileAddEditModalCloseButton = profileAddEditModal.querySelector(
 const addCardForm = profileAddEditModal.querySelector("#add-card-form");
 const cardTitleInput = addCardForm.querySelector("#card-title-input");
 const cardUrlInput = addCardForm.querySelector("#card-url-input");
+
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
@@ -67,10 +68,21 @@ function getCardElement(cardData) {
 
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
   cardImageEl.setAttribute("src", cardData.link);
   cardImageEl.setAttribute("alt", cardData.name);
   cardTitleEl.textContent = cardData.name;
   return cardElement;
+}
+
+function renderCard(cardData) {
+  const cardElement = getCardElement(cardData);
+  cardListEl.prepend(cardElement);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -84,7 +96,9 @@ function handleProfileEditSubmit(e) {
 }
 function handleAddCardSubmit(e) {
   e.preventDefault();
-  const cardElement = getCardElement();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link }, cardListEl);
   closePopUp(profileAddEditModal);
 }
 
@@ -108,8 +122,11 @@ profileAddEditModalCloseButton.addEventListener("click", () =>
 );
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.append(cardElement);
-});
+// initialCards.forEach((cardData) => {
+//   const cardElement = getCardElement(cardData);
+//   cardListEl.append(cardElement);
+// });
+
+initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
