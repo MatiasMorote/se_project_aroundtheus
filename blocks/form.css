@@ -17,3 +17,15 @@
   font-weight: 400;
   color: #000;
 }
+
+.popup__error {
+  font-family: "Inter", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5;
+  color: #ff0000;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  transition: opacity 0.3s;
+}
