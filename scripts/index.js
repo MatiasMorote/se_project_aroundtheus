@@ -58,6 +58,7 @@ const previewImageModalCloseButton = previewImageModal.querySelector(
 );
 const modalImage = previewImageModal.querySelector("#modal-image");
 const modalCaption = previewImageModal.querySelector("#modal-caption");
+const modals = document.querySelectorAll(".modal");
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
@@ -67,6 +68,15 @@ function closePopUp(modal) {
 
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
+}
+
+function closeModalonEscapeKey(event) {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closePopUp(openedModal);
+    }
+  }
 }
 
 function getCardElement(cardData) {
@@ -146,6 +156,8 @@ addCardForm.addEventListener("submit", handleAddCardSubmit);
 previewImageModalCloseButton.addEventListener("click", () =>
   closePopUp(previewImageModal)
 );
+
+document.addEventListener("keydown", closeModalonEscapeKey);
 
 // initialCards.forEach((cardData) => {
 //   const cardElement = getCardElement(cardData);
