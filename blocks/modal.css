@@ -116,6 +116,16 @@
   color: #fff;
 }
 
+.modal__from-label {
+  position: relative;
+}
+
+.modal__button_disabled {
+  border: 1px solid #000000;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 @media screen and (max-width: 630px) {
   .modal__close {
     bottom: calc(100% + 25px);
