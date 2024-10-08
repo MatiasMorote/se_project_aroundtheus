@@ -21,20 +21,3 @@
 .form__input_type_error {
   border-bottom: 1px solid #ff0000;
 }
-
-.popup__error {
-  display: none;
-  font-family: "Inter", "Arial", sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.5;
-  color: #ff0000;
-  position: absolute;
-  top: calc(100% + -265px);
-  left: 5;
-  transition: opacity 0.3s;
-}
-
-.popup__error_visible {
-  display: block;
-}

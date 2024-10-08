@@ -116,14 +116,44 @@
   color: #fff;
 }
 
-.modal__from-label {
-  position: relative;
+.modal__form {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__button_disabled {
   border: 1px solid #000000;
   opacity: 0.2;
   pointer-events: none;
+}
+
+.modal__input_type_error {
+  border-bottom-color: 1px solid red;
+}
+
+.modal__error_visible {
+  display: block;
+  color: #ff0000;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14.5px;
+  position: absolute;
+}
+
+.modal__error_visible:disabled {
+  display: block;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
 @media screen and (max-width: 630px) {

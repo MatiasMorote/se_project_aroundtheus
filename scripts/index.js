@@ -62,21 +62,23 @@ const modals = document.querySelectorAll(".modal");
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
+function handleEscapeKey(e) {
+  if (e.key === "Escape") {
+    const openModal = document.querySelector(".modal_opened");
+    if (openPopUp) {
+      closePopUp(openModal);
+    }
+  }
+}
+
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("Keydown", handleEscapeKey);
 }
 
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
-}
-
-function closeModalonEscapeKey(event) {
-  if (event.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) {
-      closePopUp(openedModal);
-    }
-  }
+  document.addEventListener("Keydown", handleEscapeKey);
 }
 
 function getCardElement(cardData) {
@@ -157,7 +159,7 @@ previewImageModalCloseButton.addEventListener("click", () =>
   closePopUp(previewImageModal)
 );
 
-document.addEventListener("keydown", closeModalonEscapeKey);
+document.addEventListener("keydown", handleEscapeKey);
 
 // initialCards.forEach((cardData) => {
 //   const cardElement = getCardElement(cardData);
