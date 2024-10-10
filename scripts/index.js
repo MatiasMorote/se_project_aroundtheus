@@ -71,13 +71,21 @@ function handleEscapeKey(e) {
   }
 }
 
+function handleOverlayClick(e) {
+  if (e.target.classList.contains("modal_opened")) {
+    closePopUp(e.target);
+  }
+}
+
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("mousedown", handleOverlayClick);
   document.removeEventListener("Keydown", handleEscapeKey);
 }
 
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("mousedown", handleOverlayClick);
   document.addEventListener("Keydown", handleEscapeKey);
 }
 
