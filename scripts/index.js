@@ -65,7 +65,7 @@ const modals = document.querySelectorAll(".modal");
 function handleEscapeKey(e) {
   if (e.key === "Escape") {
     const openModal = document.querySelector(".modal_opened");
-    if (openPopUp) {
+    if (openModal) {
       closePopUp(openModal);
     }
   }
@@ -80,13 +80,13 @@ function handleOverlayClick(e) {
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("mousedown", handleOverlayClick);
-  document.removeEventListener("Keydown", handleEscapeKey);
+  document.removeEventListener("keydown", handleEscapeKey);
 }
 
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("mousedown", handleOverlayClick);
-  document.addEventListener("Keydown", handleEscapeKey);
+  document.addEventListener("keydown", handleEscapeKey);
 }
 
 function getCardElement(cardData) {

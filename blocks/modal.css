@@ -25,7 +25,7 @@
   position: relative;
   padding: 36px;
   background-color: #fff;
-  margin: auto;
+  margin: 0 19px;
   color: #000;
   border-radius: 10px;
   box-sizing: border-box;
@@ -166,10 +166,19 @@
   }
 }
 @media screen and (max-width: 375px) {
+  .modal__container {
+    width: calc(100% - 38px);
+  }
   .modal__heading {
     font-size: 18px;
   }
   .modal__button {
-    max-width: 238px;
+    font-size: 14px;
+    line-height: 16.94px;
+    min-height: 46px;
+    margin: 0 auto;
+  }
+  .modal_opened {
+    padding: 0;
   }
 }
