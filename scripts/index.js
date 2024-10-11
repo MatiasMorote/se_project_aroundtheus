@@ -167,8 +167,6 @@ previewImageModalCloseButton.addEventListener("click", () =>
   closePopUp(previewImageModal)
 );
 
-document.addEventListener("keydown", handleEscapeKey);
-
 // initialCards.forEach((cardData) => {
 //   const cardElement = getCardElement(cardData);
 //   cardListEl.append(cardElement);
