@@ -60,7 +60,6 @@ function enableValidation(options) {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-
     setEventListeners(formEl, options);
     //look for all inputs inside of form
     //lopp through all the inputs to see if all are valid
