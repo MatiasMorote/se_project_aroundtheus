@@ -1,4 +1,3 @@
-import Card from ".Card.js";
 import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
@@ -62,6 +61,29 @@ const previewImageModalCloseButton = previewImageModal.querySelector(
 const modalImage = previewImageModal.querySelector("#modal-image");
 const modalCaption = previewImageModal.querySelector("#modal-caption");
 const modals = document.querySelectorAll(".modal");
+
+/* -------------------------------------------------------------------------- */
+/*                                 validation                                 */
+/* -------------------------------------------------------------------------- */
+const validationSettings = {
+  inputSelector: ".form__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormElement = profileEditModal.querySelector(".modal__form");
+const addFormElement = profileAddEditModal.querySelector(".modal__form");
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  editFormElement
+);
+
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
