@@ -27,13 +27,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-const card = new Card(cardData, "#card-template");
-card.getView();
-
 /* -------------------------------------------------------------------------- */
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
@@ -68,6 +61,21 @@ const previewImageModalCloseButton = previewImageModal.querySelector(
 const modalImage = previewImageModal.querySelector("#modal-image");
 const modalCaption = previewImageModal.querySelector("#modal-caption");
 const modals = document.querySelectorAll(".modal");
+
+const cardSelector = "#card-template";
+
+function handleImagePreview({ name, link }) {
+  modalImage.src = link;
+  modalImage.alt = name;
+  modalCaption.textContent = name;
+  openPopUp(previewImageModal);
+}
+
+function renderCard(cardData) {
+  const card = new Card(cardData, cardSelector);
+  const cardElement = card.getView(handleImagePreview);
+  cardListEl.prepend(cardElement);
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                 validation                                 */
@@ -150,10 +158,11 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
-function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
-}
+// function renderCard(cardData) {
+//   const card = new Card(cardData, cardSelector);
+//   const cardElement = getCardElement(cardData);
+//   cardListEl.prepend(card.getView());
+// }
 
 /* -------------------------------------------------------------------------- */
 /*                               Event Handlers                               */
@@ -204,4 +213,5 @@ previewImageModalCloseButton.addEventListener("click", () =>
 //   cardListEl.append(cardElement);
 // });
 
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+//initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+initialCards.forEach(renderCard);
