@@ -51,6 +51,7 @@ const profileAddEditModalCloseButton = profileAddEditModal.querySelector(
   "#add-card-modal-close-button"
 );
 const addCardForm = profileAddEditModal.querySelector("#add-card-form");
+const addCardSubmitButton = document.querySelector("#add-card-submit-button");
 const cardTitleInput = addCardForm.querySelector("#card-title-input");
 const cardUrlInput = addCardForm.querySelector("#card-url-input");
 
@@ -65,6 +66,7 @@ const modals = document.querySelectorAll(".modal");
 const cardSelector = "#card-template";
 
 function handleImagePreview({ name, link }) {
+  console.log("preview data", { name, link });
   modalImage.src = link;
   modalImage.alt = name;
   modalCaption.textContent = name;
@@ -72,10 +74,31 @@ function handleImagePreview({ name, link }) {
 }
 
 function renderCard(cardData) {
-  const card = new Card(cardData, cardSelector);
-  const cardElement = card.getView(handleImagePreview);
+  const card = new Card(cardData, cardSelector, handleImagePreview);
+  const cardElement = card.getView();
   cardListEl.prepend(cardElement);
 }
+
+function toggleSubmitButtonState() {
+  if (cardTitleInput.value !== "" && cardUrlInput.value !== "") {
+    addCardSubmitButton.disabled = false;
+    addCardSubmitButton.classList.remove("modal__button_disabled");
+  } else {
+    addCardSubmitButton.disabled = true;
+    addCardSubmitButton.classList.add("modal__button_disabled");
+  }
+}
+
+cardTitleInput.addEventListener("input", toggleSubmitButtonState);
+cardUrlInput.addEventListener("input", toggleSubmitButtonState);
+
+addCardForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  closePopUp(profileAddEditModal);
+  addCardForm.reset();
+  toggleSubmitButtonState();
+});
 
 /* -------------------------------------------------------------------------- */
 /*                                 validation                                 */
