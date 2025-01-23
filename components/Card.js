@@ -47,7 +47,6 @@
 
 class Card {
   constructor(data, cardSelector, handleImagePreview) {
-    console.log("card cunstrcutor", { data, cardSelector, handleImagePreview });
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
@@ -104,6 +103,7 @@ class Card {
 
   // Public method to return the fully initialized card element
   getView() {
+    console.log("card image source", this._link);
     this._cardElement = this._getTemplate();
     this._imageElement = this._cardElement.querySelector(".card__image");
     this._titleElement = this._cardElement.querySelector(".card__title");
