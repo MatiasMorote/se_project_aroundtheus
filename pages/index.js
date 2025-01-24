@@ -73,32 +73,17 @@ function handleImagePreview({ name, link }) {
   openPopUp(previewImageModal);
 }
 
-function renderCard(cardData) {
+//added after code review 1/24/25
+// encapsulates logic of creating new card, can be used to append a new card.
+function createCard(cardData) {
   const card = new Card(cardData, cardSelector, handleImagePreview);
-  const cardElement = card.getView();
-  console.log("rendering card", { cardData, cardElement });
+  return card.getView();
+}
+
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
   cardListEl.prepend(cardElement);
 }
-
-function toggleSubmitButtonState() {
-  if (cardTitleInput.value !== "" && cardUrlInput.value !== "") {
-    addCardSubmitButton.disabled = false;
-    addCardSubmitButton.classList.remove("modal__button_disabled");
-  } else {
-    addCardSubmitButton.disabled = true;
-    addCardSubmitButton.classList.add("modal__button_disabled");
-  }
-}
-
-cardTitleInput.addEventListener("input", toggleSubmitButtonState);
-cardUrlInput.addEventListener("input", toggleSubmitButtonState);
-
-addCardForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  closePopUp(profileAddEditModal);
-  toggleSubmitButtonState();
-});
 
 /* -------------------------------------------------------------------------- */
 /*                                 validation                                 */
@@ -111,8 +96,8 @@ const validationSettings = {
   errorClass: "modal__error_visible",
 };
 
-const editFormElement = profileEditModal.querySelector(".modal__form");
-const addFormElement = profileAddEditModal.querySelector(".modal__form");
+const editFormElement = profileEditForm;
+const addFormElement = addCardForm;
 
 const editFormValidator = new FormValidator(
   validationSettings,
@@ -180,11 +165,19 @@ function handleAddCardSubmit(e) {
 
     closePopUp(profileAddEditModal);
     addCardForm.reset();
-    toggleSubmitButtonState();
+    //code review fix 1/24/25
+    addFormValidator.resetValidation();
   } else {
     console.error("Card title and image URL are required.");
   }
 }
+// added feature after code review 1/24/25 - "Could be Improved" not "Needs Correcting"
+const closeButtons = document.querySelectorAll(".modal__close");
+
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal");
+  button.addEventListener("click", () => closePopUp(popup));
+});
 /* -------------------------------------------------------------------------- */
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
@@ -193,9 +186,9 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
 });
-profileEditModalCloseButton.addEventListener("click", () =>
-  closePopUp(profileEditModal)
-);
+// profileEditModalCloseButton.addEventListener("click", () =>
+//   closePopUp(profileEditModal)
+// );
 
 profileAddEditButton.addEventListener("click", () =>
   openPopUp(profileAddEditModal)
@@ -218,10 +211,5 @@ cardTitleInput.addEventListener("input", () => {
 cardUrlInput.addEventListener("input", () => {
   console.log("Updated card URL value", cardUrlInput.value);
 });
-// initialCards.forEach((cardData) => {
-//   const cardElement = getCardElement(cardData);
-//   cardListEl.append(cardElement);
-// });
 
-//initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 initialCards.forEach(renderCard);
