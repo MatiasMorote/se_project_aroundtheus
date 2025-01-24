@@ -166,7 +166,7 @@ function handleAddCardSubmit(e) {
     closePopUp(profileAddEditModal);
     addCardForm.reset();
     //code review fix 1/24/25
-    addFormValidator.resetValidation();
+    addFormValidator.disableButton();
   } else {
     console.error("Card title and image URL are required.");
   }
@@ -186,30 +186,12 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
   openPopUp(profileEditModal);
 });
-// profileEditModalCloseButton.addEventListener("click", () =>
-//   closePopUp(profileEditModal)
-// );
 
 profileAddEditButton.addEventListener("click", () =>
   openPopUp(profileAddEditModal)
 );
-profileAddEditModalCloseButton.addEventListener("click", () =>
-  closePopUp(profileAddEditModal)
-);
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
-
-previewImageModalCloseButton.addEventListener("click", () =>
-  closePopUp(previewImageModal)
-);
-
-cardTitleInput.addEventListener("input", () => {
-  console.log("Updated card Title value", cardTitleInput.value);
-});
-
-cardUrlInput.addEventListener("input", () => {
-  console.log("Updated card URL value", cardUrlInput.value);
-});
 
 initialCards.forEach(renderCard);
