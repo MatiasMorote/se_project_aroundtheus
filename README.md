@@ -24,7 +24,7 @@ These are the images I used for this project, they were taken from the Figma des
 ![Alt](images/lake-louise.png)
 ![Alt](images/yosemite-valley.png)
 
-**Link to thhe Website**
+**Link to the Website**
 (https://matiasmorote.github.io/se_project_aroundtheus/)
 
 **Conclusion**
