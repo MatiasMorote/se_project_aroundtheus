@@ -34,7 +34,6 @@ class Card {
 
   // Private method to handle image click event
   _handleImageClick() {
-    console.log("image clicked in Card");
     // This should open the image modal. The logic for opening the modal should be passed in.
     if (this._handleImagePreview) {
       this._handleImagePreview({

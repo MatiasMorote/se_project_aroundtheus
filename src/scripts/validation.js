@@ -1,3 +1,4 @@
+import { validationSettings } from "../utils/constants";
 // enable validation by calling enableValidation()
 // pass all the settings on call
 
@@ -10,13 +11,12 @@ function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  console.log(errorMessageEl);
   inputEl.classList.remove(inputErrorClass);
   errorMessageEl.textContent = "";
   errorMessageEl.classList.remove(errorClass);
 }
 
-function checkinputValidity(formEl, inputEl, options) {
+function checkInputValidity(formEl, inputEl, options) {
   if (!inputEl.validity.valid) {
     return showInputError(formEl, inputEl, options);
   }
@@ -48,7 +48,7 @@ function setEventListeners(formEl, options) {
 
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
-      checkinputValidity(formEl, inputEl, options);
+      checkInputValidity(formEl, inputEl, options);
       toggleButtonState(inputEls, submitButton, options);
     });
   });
@@ -74,13 +74,4 @@ function enableValidation(options) {
   });
 }
 
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-enableValidation(config);
+enableValidation(validationSettings);
