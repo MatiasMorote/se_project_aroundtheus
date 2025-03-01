@@ -16,15 +16,15 @@ This project deals with responsive web design, focusing on 1280px screen size an
 
 These are the images I used for this project, they were taken from the Figma design that was given.
 
-![Alt text](images/bald-mountains.png)
-![Alt text](images/jacques-cousteau.png)
-![Alt](images/vanoise-national-park.png)
-![Alt](images/latemar.png)
-![Alt](images/lago-di-braies.png)
-![Alt](images/lake-louise.png)
-![Alt](images/yosemite-valley.png)
+![Alt text](src/images/bald-mountains.png)
+![Alt text](src/images/jacques-cousteau.png)
+![Alt](src/images/vanoise-national-park.png)
+![Alt](src/images/latemar.png)
+![Alt](src/images/lago-di-braies.png)
+![Alt](src/images/lake-louise.png)
+![Alt](src/images/yosemite-valley.png)
 
-**Link to thhe Website**
+**Link to the Website**
 (https://matiasmorote.github.io/se_project_aroundtheus/)
 
 **Conclusion**
