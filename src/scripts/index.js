@@ -122,8 +122,10 @@ const closeButtons = document.querySelectorAll(".modal__close");
 
 closeButtons.forEach((button) => {
   const popup = button.closest(".modal");
-  button.addEventListener("click", () => closePopUp(popup));
+  const popupInstance = new Popup(`#${popup.id}`);
+  button.addEventListener("click", () => popupInstance.close());
 });
+
 /* -------------------------------------------------------------------------- */
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
