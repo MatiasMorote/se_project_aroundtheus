@@ -25,8 +25,15 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  setValidator(validatorInstance) {
+    this._formValidator = validatorInstance;
+  }
+
   close() {
     super.close();
     this._form.reset();
+    if (this._validator) {
+      this._validator.disableButton();
+    }
   }
 }

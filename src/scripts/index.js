@@ -16,10 +16,6 @@ const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
 });
-const currentUserInfo = userInfo.getUserInfo();
-console.log(currentUserInfo);
-
-userInfo.setUserInfo("New Name", "New Job");
 
 const previewImagePopup = new PopupWithImage("#preview-image-modal");
 previewImagePopup.setEventListeners();
@@ -31,45 +27,26 @@ function handleImagePreview({ name, link }) {
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
-    console.log("Profile Edit Form Submitted:", formData);
-    profileTitle.textContent = formData["profile-title"];
-    profileDescription.textContent = formData["profile-description"];
+    userInfo.setUserInfo({
+      name: formData["profile__title"],
+      job: formData["profile__description"],
+    });
+
+    // console.log("User data to set", userData);
+
+    profileEditPopup.close();
   }
 );
 
 const addCardPopup = new PopupWithForm("#add-card-modal", (formData) => {
-  const { title, url } = formData;
-  if (!title || !url) {
-    console.error("🚨 Card title and image URL are required.");
-    return;
-  }
-
   const newCard = new Card(
-    { name: title, link: url },
+    { name: formData.title, link: formData.url },
     cardSelector,
     handleImagePreview
   );
   cardSection.addItem(newCard.getView());
-
   addCardPopup.close();
 });
-addCardPopup.setEventListeners(); // Only call once
-
-profileEditPopup.setEventListeners();
-
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const card = new Card(cardData, cardSelector, handleImagePreview);
-      const cardElement = card.getView();
-      cardSection.addItem(cardElement); // Append to DOM
-    },
-  },
-  ".gallery__cards"
-);
-
-cardSection.renderItems(); //Render all initial cards properly
 
 /* -------------------------------------------------------------------------- */
 /*                                  Elements                                  */
@@ -107,34 +84,37 @@ const addFormValidator = new FormValidator(validationSettings, addFormElement);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-/* -------------------------------------------------------------------------- */
-/*                               Event Handlers                               */
-/* -------------------------------------------------------------------------- */
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  profileEditPopup.close();
-}
+// card section
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const card = new Card(cardData, cardSelector, handleImagePreview);
+      const cardElement = card.getView();
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".gallery__cards"
+);
 
-// added feature after code review 1/24/25 - "Could be Improved" not "Needs Correcting"
-const closeButtons = document.querySelectorAll(".modal__close");
-
-closeButtons.forEach((button) => {
-  const popup = button.closest(".modal");
-  const popupInstance = new Popup(`#${popup.id}`);
-  button.addEventListener("click", () => popupInstance.close());
-});
+cardSection.renderItems();
 
 /* -------------------------------------------------------------------------- */
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  const currentUserInfo = userInfo.getUserInfo();
+  profileTitleInput.value = currentUserInfo.name;
+  profileDescriptionInput.value = currentUserInfo.job;
+  editFormValidator.resetValidation();
   profileEditPopup.open();
 });
 
-profileAddEditButton.addEventListener("click", () => addCardPopup.open());
+profileAddEditButton.addEventListener("click", () => {
+  addFormValidator.resetValidation();
+  addCardPopup.open();
+});
 
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+profileEditPopup.setEventListeners();
+addCardPopup.setEventListeners();

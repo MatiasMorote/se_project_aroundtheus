@@ -7,6 +7,8 @@ class FormValidator {
     this._errorClass = settings.errorClass;
     // adding form to our FormValidaor
     this._form = formElement;
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this.disableButton();
   }
 
   _showInputError(inputEl) {
@@ -72,9 +74,8 @@ class FormValidator {
   }
 
   resetValidation() {
-    this._inputEls.forEach((input) => this._hideInputError(input));
-
     this._toggleButtonState();
+    this._inputEls.forEach((input) => this._hideInputError(input));
   }
 
   disableButton() {
