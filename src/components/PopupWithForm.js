@@ -4,8 +4,9 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._form = this._popup.querySelector(".modal__form");
-    this._inputList = this._form.querySelectorAll(".form__input");
+    this.form = this._popup.querySelector(".modal__form");
+    this._inputList = this.form.querySelectorAll(".form__input");
+    this._submitButton = this.form.querySelector(".modal__button");
   }
 
   _getInputValues() {
@@ -18,22 +19,30 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (event) => {
+    this.form.addEventListener("submit", (event) => {
       event.preventDefault();
       this._handleFormSubmit(this._getInputValues());
+      if (this._validator) {
+        this._validator.disableButton();
+      }
       this.close();
     });
   }
 
   setValidator(validatorInstance) {
-    this._formValidator = validatorInstance;
+    this.formValidator = validatorInstance;
+  }
+
+  open() {
+    super.open();
+
+    if (this._submitButton) {
+      this._submitButton.disabled = false;
+      this._submitButton.classList.remove("modal__button_disabled");
+    }
   }
 
   close() {
     super.close();
-    this._form.reset();
-    if (this._validator) {
-      this._validator.disableButton();
-    }
   }
 }
