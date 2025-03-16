@@ -8,6 +8,7 @@ class FormValidator {
     // adding form to our FormValidaor
     this._form = formElement;
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this._inputEls = [...this._form.querySelectorAll(this._inputSelector)];
     this.disableButton();
   }
 
@@ -73,14 +74,17 @@ class FormValidator {
     this._setEventListeners();
   }
 
-  resetValidation() {
-    this._toggleButtonState();
-    this._inputEls.forEach((input) => this._hideInputError(input));
-  }
-
   disableButton() {
+    console.log("disabling button...");
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
+    console.log("button disabled state");
+  }
+
+  resetValidation() {
+    console.log("resetting validation");
+    this._inputEls.forEach((input) => this._hideInputError(input));
+    this.disableButton();
   }
 }
 

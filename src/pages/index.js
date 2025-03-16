@@ -96,6 +96,9 @@ const addFormValidator = new FormValidator(validationSettings, addCardForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
+profileEditPopup.setValidator(editFormValidator);
+addCardPopup.setValidator(addFormValidator);
+
 // const editFormElement = profileEditForm;
 // const addFormElement = addCardForm;
 
@@ -134,6 +137,7 @@ profileEditButton.addEventListener("click", () => {
 });
 
 profileAddEditButton.addEventListener("click", () => {
+  addCardPopup.resetForm();
   addCardPopup.open();
 });
 

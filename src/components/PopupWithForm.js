@@ -17,32 +17,24 @@ export default class PopupWithForm extends Popup {
     return inputValues;
   }
 
+  setValidator(validatorInstance) {
+    this._formValidator = validatorInstance;
+  }
+
+  resetForm() {
+    console.log("Resetting form...");
+    this.form.reset();
+    if (this._formValidator) {
+      this._formValidator.resetValidation();
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      if (this._validator) {
-        this._validator.disableButton();
-      }
       this.close();
     });
-  }
-
-  setValidator(validatorInstance) {
-    this.formValidator = validatorInstance;
-  }
-
-  open() {
-    super.open();
-
-    if (this._submitButton) {
-      this._submitButton.disabled = false;
-      this._submitButton.classList.remove("modal__button_disabled");
-    }
-  }
-
-  close() {
-    super.close();
   }
 }
