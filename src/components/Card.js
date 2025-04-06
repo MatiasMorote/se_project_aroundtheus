@@ -20,7 +20,7 @@ class Card {
 
   // Private method to handle liking a card
   _handleLikeButton() {
-    this._handleToggleLike(this._id, this._cardElement);
+    this._handleToggleLike(this);
   }
 
   // Private method to handle deleting a card
@@ -63,6 +63,18 @@ class Card {
       .content.querySelector(".card")
       .cloneNode(true);
     return cardElement;
+  }
+
+  isLiked() {
+    return this._likeButton.classList.contains("card__like-button_active");
+  }
+
+  updateLikeButton(isLikedFromServer) {
+    if (isLikedFromServer) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
+    }
   }
 
   // Public method to return the fully initialized card element

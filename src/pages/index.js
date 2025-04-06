@@ -12,7 +12,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-import PopupWithConfirm from "../components/popupWithConfirm.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -71,7 +71,7 @@ function handleImagePreview({ name, link }) {
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
-    profileEditPopup.setLoading(true);
+    profileEditPopup.renderLoading(true);
     api
       .updateUserInfo({
         name: formData["profile__title"],
@@ -88,7 +88,7 @@ const profileEditPopup = new PopupWithForm(
         console.error(err);
       })
       .finally(() => {
-        profileEditPopup.setLoading(false);
+        profileEditPopup.renderLoading(false);
       });
 
     // console.log("User data to set", userData);
@@ -97,7 +97,7 @@ const profileEditPopup = new PopupWithForm(
 
 const addCardPopup = new PopupWithForm("#add-card-modal", (formData) => {
   console.log("formdata submitted", formData);
-  addCardPopup.setLoading(true);
+  addCardPopup.renderLoading(true);
   api
     .addCard({
       name: formData.title,
@@ -112,13 +112,13 @@ const addCardPopup = new PopupWithForm("#add-card-modal", (formData) => {
       console.error(err);
     })
     .finally(() => {
-      addCardPopup.setLoading(false);
+      addCardPopup.renderLoading(false);
     });
 });
 
 const editAvatarPopup = new PopupWithForm("#avatar-edit-modal", (formData) => {
   console.log("avatar url", formData.url);
-  editAvatarPopup.setLoading(true);
+  editAvatarPopup.renderLoading(true);
   api
     .updateAvatar({
       url: formData.url,
@@ -131,7 +131,7 @@ const editAvatarPopup = new PopupWithForm("#avatar-edit-modal", (formData) => {
       console.error(err);
     })
     .finally(() => {
-      editAvatarPopup.setLoading(false);
+      editAvatarPopup.renderLoading(false);
     });
 });
 
@@ -156,7 +156,9 @@ const deleteConfirmPopup = new PopupWithConfirm("#delete-card-modal");
 deleteConfirmPopup.setEventListeners();
 
 function handleDeleteClick(cardId, cardElement) {
+  console.log("opening delete confirm modal for card id", cardId);
   deleteConfirmPopup.open(() => {
+    console.log("Confirmed delete for ID:", cardId);
     api
       .deleteCard(cardId)
       .then(() => {
@@ -169,17 +171,15 @@ function handleDeleteClick(cardId, cardElement) {
   });
 }
 
-function handleToggleLike(cardId, cardElement) {
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const isLiked = likeButton.classList.contains("card__like-button_active");
-  const apiCall = isLiked ? api.unlikeCard(cardId) : api.likeCard(cardId);
+function handleToggleLike(cardInstance) {
+  const isLiked = cardInstance.isLiked();
+  const apiCall = isLiked
+    ? api.unlikeCard(cardInstance._id)
+    : api.likeCard(cardInstance._id);
+
   apiCall
     .then((updatedCard) => {
-      if (updatedCard.isLiked) {
-        likeButton.classList.add("card__like-button_active");
-      } else {
-        likeButton.classList.remove("card__like-button_active");
-      }
+      cardInstance.updateLikeButton(updatedCard.isLiked);
     })
     .catch((err) => {
       console.error(err);
