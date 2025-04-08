@@ -74,6 +74,34 @@
   cursor: pointer;
 }
 
+.profile__image-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.profile__image-edit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  background-image: url(../images/edit-icon.svg); /* replace with your actual path */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Optional: makes the icon click-through */
+}
+
+.profile__image-container:hover .profile__image-edit-icon {
+  opacity: 1;
+}
+
 @media screen and (max-width: 640px) {
   .profile {
     flex-direction: column;

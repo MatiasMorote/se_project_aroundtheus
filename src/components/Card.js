@@ -1,20 +1,33 @@
 class Card {
-  constructor(data, cardSelector, handleImagePreview) {
+  constructor(
+    data,
+    cardSelector,
+    handleImagePreview,
+    handleDeleteClick,
+    handleToggleLike,
+    currentUserId
+  ) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleImagePreview = handleImagePreview;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleToggleLike = handleToggleLike;
+    this._currentUserId = currentUserId;
+    this._isLiked = data.isLiked;
   }
 
   // Private method to handle liking a card
   _handleLikeButton() {
-    this._likeButton.classList.toggle("card__like-button_active");
+    this._handleToggleLike(this);
   }
 
   // Private method to handle deleting a card
   _handleTrashButton() {
-    this._cardElement.remove();
-    this._cardElement = null;
+    if (this._handleDeleteClick) {
+      this._handleDeleteClick(this._id, this._cardElement);
+    }
   }
 
   // Private method to set up event listeners for the card
@@ -52,12 +65,28 @@ class Card {
     return cardElement;
   }
 
+  isLiked() {
+    return this._likeButton.classList.contains("card__like-button_active");
+  }
+
+  updateLikeButton(isLikedFromServer) {
+    if (isLikedFromServer) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
+    }
+  }
+
   // Public method to return the fully initialized card element
   getView() {
     console.log("card image source", this._link);
     this._cardElement = this._getTemplate();
     this._imageElement = this._cardElement.querySelector(".card__image");
     this._titleElement = this._cardElement.querySelector(".card__title");
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__like-button_active");
+    }
 
     // Assign data to the elements
     this._imageElement.src = this._link;

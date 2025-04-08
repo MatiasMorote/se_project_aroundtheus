@@ -16,7 +16,6 @@
     <div class="page__content">
       <header class="header page__section">
         <img
-1
           src="<%=require('./images/around_the_us.svg')%>"
           alt="This is the Around the U.S. logo, it is white text"
           class="header__logo"
@@ -24,11 +23,14 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.png')%>"
-            alt="Avatar picture for the profile"
-            class="profile__image"
-          />
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.png')%>"
+              alt="Avatar picture for the profile"
+              class="profile__image"
+            />
+            <div class="profile__image-edit-icon"></div>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -136,6 +138,32 @@
           <img src="" alt="" class="modal__image" id="modal-image" />
           <div class="modal__caption" id="modal-caption"></div>
         </div>
+      </div>
+    </div>
+
+    <!--Add popup confirm when deleting image-->
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container-delete">
+        <button class="modal__close" id="close-confirm-delete-image-button"></button>
+        <h2 class="modal__heading">Are you sure?</h2>
+        <div class="modal__form form" id="confirm-delete-image-modal">
+          <button type="submit" class="modal__button">Yes</button>
+        </div>
+      </div>
+    </div>
+
+    <!--Avatar image edit modal-->
+    <div class="modal" id="avatar-edit-modal">
+      <div class="modal__container-avatar">
+        <button class="modal__close" id="avatar-edit-modal-close"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form form" id="avatar-edit-form">
+          <label>
+            <input type="url" name="url" class="form__input" id="avatar-edit-input" placeholder="Image URL" required>
+            <span class="modal__error" id="avatar-edit-input-error"></span>
+          </label>
+          <button type="submit" class="modal__button">Save</button>
+        </form>
       </div>
     </div>
 
