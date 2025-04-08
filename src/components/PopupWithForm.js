@@ -42,7 +42,7 @@ export default class PopupWithForm extends Popup {
     if (isLoading) {
       this._submitButton.textContent = loadingText;
     } else {
-      this._submitButtonText.textContent = this._submitBtnText;
+      this._submitButton.textContent = this._submitBtnText;
     }
   }
 }
